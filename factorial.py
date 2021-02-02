@@ -14,28 +14,32 @@ def fact_rec(n):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
+
+    setup = '''
+        '''
+
     n=int(input("Zadej n pro výpočet faktoriálu: "))
     if n<0:
         raise CustomException("N musí být nezáporné!")
     else:
-        start_time = timeit.timeit()
-        n_factorial=1
-        for my_counter in range(n+1):
-            if my_counter==0 or my_counter==1:
-                n_factorial=1
-            else:
-                n_factorial=n_factorial*my_counter
+        factorial_iter='''
+    n_factorial=1
+    for my_counter in range(n+1):
+        if my_counter==0 or my_counter==1:
+            n_factorial=1
+        else:
+            n_factorial=n_factorial*my_counter
+    print("Faktoriál iterací: ",n_factorial)
+        '''
 
-        end_time = timeit.timeit()
-        print("Délka výpočtu faktoriálu iterací:",(end_time-start_time))
 
-        print("Faktoriál iterací: ",n_factorial)
 
-        print("Délka výpočtu faktoriálu iterací:",(end_time - start_time))
-        start_time = timeit.timeit()
-        n_factorial2=int(fact_rec(n))
-        end_time = timeit.timeit()
-        print("Délka výpočtu faktoriálu rekurzí:",(end_time - start_time))
-        print("Faktoriál rekurzí: ",n_factorial2)
+
+    factorial_recursive='''
+n_factorial2=int(fact_rec(n))
+print("Faktoriál rekurzí: ",n_factorial2)
+'''
+
+    print(timeit.timeit(stmt=factorial_iter, number=1000))
 
 
