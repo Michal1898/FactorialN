@@ -12,34 +12,34 @@ def fact_rec(n):
     else:
         return n*fact_rec(n-1)
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-
-    setup = '''
-        '''
-
-    n=int(input("Zadej n pro výpočet faktoriálu: "))
-    if n<0:
-        raise CustomException("N musí být nezáporné!")
-    else:
-        factorial_iter='''
-    n_factorial=1
+def fact_iter(n):
     for my_counter in range(n+1):
         if my_counter==0 or my_counter==1:
             n_factorial=1
         else:
             n_factorial=n_factorial*my_counter
-    print("Faktoriál iterací: ",n_factorial)
-        '''
+    return  n_factorial
+# Press the green button in the gutter to run the script.
+if __name__ == '__main__':
+
+    n=int(input("Zadej n pro výpočet faktoriálu: "))
+    if n<0:
+        raise CustomException("N musí být nezáporné!")
+    else:
+        n_factorial1=fact_iter(n)
+        print("Faktoriál iterací: ",n_factorial1)
+
+        n_factorial2=int(fact_rec(n))
+        print("Faktoriál rekurzí: ",n_factorial2)
 
 
-
-
-    factorial_recursive='''
-n_factorial2=int(fact_rec(n))
-print("Faktoriál rekurzí: ",n_factorial2)
-'''
-
-    print(timeit.timeit(stmt=factorial_iter, number=1000))
+        print("Faktoriál rekurzí: ",timeit.timeit("fact_rec(n)",
+                                                  "from __main__ import fact_rec, n",
+                                                  number=1000000),
+                                                  "sekund")
+        print("Faktoriál iterací: ",timeit.timeit("fact_iter(n)",
+                                                  "from __main__ import fact_iter, n",
+                                                  number=1000000),
+                                                  "sekund")
 
 
